@@ -127,6 +127,113 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* -------------------------------------------------------
+     CLICK ANYWHERE → SHIFT THE PALETTE
+     Almost every accent color in style.css is derived from
+     the --hue-base custom property. Rotating it here shifts
+     the whole site's gradients, glows and blobs together.
+     A short-lived ripple ring is also dropped at the click
+     point, colored to match the new palette.
+     ------------------------------------------------------- */
+  let hue = 258;
+
+  function shiftPalette(x, y) {
+    hue = (hue + 47) % 360;
+    document.documentElement.style.setProperty("--hue-base", hue);
+
+    const ripple = document.createElement("span");
+    ripple.className = "click-ripple";
+    ripple.style.left = x + "px";
+    ripple.style.top = y + "px";
+    document.body.appendChild(ripple);
+    ripple.addEventListener("animationend", () => ripple.remove());
+  }
+
+  document.addEventListener("click", (e) => {
+    shiftPalette(e.clientX, e.clientY);
+  });
+
+
+  /* -------------------------------------------------------
+     CURSOR-FOLLOW GLOW
+     A soft glow that trails the pointer with a little lag,
+     skipped on touch devices and reduced-motion.
+     ------------------------------------------------------- */
+  const glow = document.getElementById("cursorGlow");
+  const isTouchDevice = window.matchMedia("(hover: none)").matches;
+
+  if (glow && !isTouchDevice && !prefersReducedMotion) {
+
+    let targetX = window.innerWidth / 2;
+    let targetY = window.innerHeight / 2;
+    let currentX = targetX;
+    let currentY = targetY;
+
+    document.addEventListener("mousemove", (e) => {
+      targetX = e.clientX;
+      targetY = e.clientY;
+    });
+
+    function followCursor() {
+      // ease toward the target for a soft trailing feel
+      currentX += (targetX - currentX) * 0.12;
+      currentY += (targetY - currentY) * 0.12;
+      glow.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+      requestAnimationFrame(followCursor);
+    }
+
+    requestAnimationFrame(followCursor);
+  } else if (glow) {
+    glow.style.display = "none";
+  }
+
+
+  /* -------------------------------------------------------
+     TILT ON HOVER (glass panels)
+     Cards lean slightly toward the pointer. Purely visual,
+     skipped on touch devices and reduced-motion.
+     ------------------------------------------------------- */
+  if (!isTouchDevice && !prefersReducedMotion) {
+    document.querySelectorAll(".glass-panel").forEach((panel) => {
+
+      panel.addEventListener("mousemove", (e) => {
+        const rect = panel.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width - 0.5;
+        const py = (e.clientY - rect.top) / rect.height - 0.5;
+        const tiltStrength = 6; // degrees, kept subtle on purpose
+        panel.style.transform =
+          `perspective(900px) rotateX(${(-py * tiltStrength).toFixed(2)}deg) ` +
+          `rotateY(${(px * tiltStrength).toFixed(2)}deg) translateY(-4px)`;
+      });
+
+      panel.addEventListener("mouseleave", () => {
+        panel.style.transform = "";
+      });
+    });
+
+
+    /* -----------------------------------------------------
+       MAGNETIC BUTTONS
+       Buttons drift a few pixels toward the pointer while
+       hovered, and spring back on leave.
+       ----------------------------------------------------- */
+    document.querySelectorAll(".btn").forEach((btn) => {
+
+      btn.addEventListener("mousemove", (e) => {
+        const rect = btn.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width - 0.5;
+        const py = (e.clientY - rect.top) / rect.height - 0.5;
+        const pull = 10; // max pixels of movement
+        btn.style.transform = `translate(${(px * pull).toFixed(1)}px, ${(py * pull).toFixed(1)}px)`;
+      });
+
+      btn.addEventListener("mouseleave", () => {
+        btn.style.transform = "";
+      });
+    });
+  }
+
+
+  /* -------------------------------------------------------
      TYPEWRITER TAGLINE
      Edit the PHRASES array to change what it cycles through.
      ------------------------------------------------------- */
