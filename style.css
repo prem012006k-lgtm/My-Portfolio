@@ -12,19 +12,26 @@
   --void-soft:  #0A0620;   /* raised panel base */
   --panel:      rgba(255, 255, 255, 0.035);
 
-  --violet:     #8B5CF6;
-  --violet-2:   #A855F7;
-  --pink:       #E879F9;
+  /* Every accent color below derives from --hue-base.
+     script.js rotates --hue-base on every click, and because
+     everything downstream is a function of it, the whole
+     site's palette shifts together — buttons, blobs, rings,
+     glows, text gradients, all in one move. */
+  --hue-base:   258;
+
+  --violet:     hsl(var(--hue-base), 90%, 66%);
+  --violet-2:   hsl(calc(var(--hue-base) + 20), 90%, 65%);
+  --pink:       hsl(calc(var(--hue-base) + 50), 90%, 74%);
 
   --text:       #F5F3FF;
   --text-soft:  #ADA6D6;
   --text-mute:  #706A96;
 
-  --line:       rgba(168, 139, 250, 0.16);
-  --line-bright: rgba(168, 139, 250, 0.4);
+  --line:       hsla(calc(var(--hue-base) + 10), 90%, 80%, 0.16);
+  --line-bright: hsla(calc(var(--hue-base) + 10), 90%, 80%, 0.4);
 
-  --glow-1:     rgba(139, 92, 246, 0.45);
-  --glow-2:     rgba(232, 121, 249, 0.35);
+  --glow-1:     hsla(var(--hue-base), 90%, 66%, 0.45);
+  --glow-2:     hsla(calc(var(--hue-base) + 50), 90%, 74%, 0.35);
 
   --gradient: linear-gradient(120deg, var(--violet) 0%, var(--violet-2) 50%, var(--pink) 100%);
 
@@ -108,6 +115,7 @@ svg { width: 20px; height: 20px; }
   filter: blur(110px);
   opacity: 0.55;
   will-change: transform;
+  transition: background 0.8s ease;
 }
 
 .blob-a {
@@ -155,6 +163,24 @@ svg { width: 20px; height: 20px; }
     linear-gradient(90deg, rgba(168, 139, 250, 0.06) 1px, transparent 1px);
   background-size: 64px 64px;
   mask-image: radial-gradient(circle at 50% 0%, black, transparent 75%);
+}
+
+/* Soft glow that trails the pointer, added by JS. Sits above
+   the background but below content (pointer-events: none so
+   it never blocks clicks). Skipped entirely on touch devices
+   and reduced-motion by script.js. */
+.cursor-glow {
+  position: fixed;
+  top: 0; left: 0;
+  width: 480px;
+  height: 480px;
+  margin-left: -240px;
+  margin-top: -240px;
+  border-radius: 50%;
+  background: radial-gradient(circle, hsla(var(--hue-base), 90%, 66%, 0.16), transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+  will-change: transform;
 }
 
 .void-grain {
@@ -261,7 +287,8 @@ svg { width: 20px; height: 20px; }
   font-weight: 800;
   font-size: 14px;
   color: #0A0620;
-  box-shadow: 0 8px 24px rgba(139, 92, 246, 0.4);
+  box-shadow: 0 8px 24px hsla(var(--hue-base), 90%, 66%, 0.4);
+  transition: background 0.6s ease, box-shadow 0.6s ease;
 }
 
 .brand-mark.small { width: 34px; height: 34px; font-size: 12px; }
@@ -388,16 +415,17 @@ svg { width: 20px; height: 20px; }
   width: 8px; height: 8px;
   border-radius: 50%;
   background: var(--violet-2);
-  box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.6);
+  box-shadow: 0 0 0 0 hsla(calc(var(--hue-base) + 20), 90%, 65%, 0.6);
   animation: pulse 2s infinite;
+  transition: background 0.6s ease;
 }
 
 .pulse-dot.small { width: 6px; height: 6px; }
 
 @keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.55); }
-  70% { box-shadow: 0 0 0 8px rgba(168, 85, 247, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(168, 85, 247, 0); }
+  0% { box-shadow: 0 0 0 0 hsla(calc(var(--hue-base) + 20), 90%, 65%, 0.55); }
+  70% { box-shadow: 0 0 0 8px hsla(calc(var(--hue-base) + 20), 90%, 65%, 0); }
+  100% { box-shadow: 0 0 0 0 hsla(calc(var(--hue-base) + 20), 90%, 65%, 0); }
 }
 
 .hero-name {
@@ -468,10 +496,11 @@ svg { width: 20px; height: 20px; }
 .btn-primary {
   background: var(--gradient);
   color: #0A0620;
-  box-shadow: 0 15px 40px rgba(139, 92, 246, 0.35);
+  box-shadow: 0 15px 40px hsla(var(--hue-base), 90%, 66%, 0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.6s ease;
 }
 
-.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 20px 50px rgba(139, 92, 246, 0.5); }
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 20px 50px hsla(var(--hue-base), 90%, 66%, 0.5); }
 
 .btn-outline {
   border: 1.5px solid var(--line-bright);
@@ -542,12 +571,13 @@ svg { width: 20px; height: 20px; }
   width: 10px; height: 10px;
   border-radius: 50%;
   background: var(--pink);
-  box-shadow: 0 0 16px 4px rgba(232, 121, 249, 0.65);
+  box-shadow: 0 0 16px 4px hsla(calc(var(--hue-base) + 50), 90%, 74%, 0.65);
   top: 50%; left: 50%;
+  transition: background 0.6s ease;
 }
 
 .dot-1 { animation: orbit1 14s linear infinite; }
-.dot-2 { animation: orbit2 18s linear infinite reverse; background: var(--violet-2); box-shadow: 0 0 16px 4px rgba(168, 85, 247, 0.65); }
+.dot-2 { animation: orbit2 18s linear infinite reverse; background: var(--violet-2); box-shadow: 0 0 16px 4px hsla(calc(var(--hue-base) + 20), 90%, 65%, 0.65); }
 
 @keyframes orbit1 {
   from { transform: rotate(0deg) translateX(160px) rotate(0deg); }
@@ -569,7 +599,8 @@ svg { width: 20px; height: 20px; }
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: inset 0 0 40px rgba(139, 92, 246, 0.25), 0 0 60px rgba(139, 92, 246, 0.2);
+  box-shadow: inset 0 0 40px hsla(var(--hue-base), 90%, 66%, 0.25), 0 0 60px hsla(var(--hue-base), 90%, 66%, 0.2);
+  transition: box-shadow 0.6s ease;
 }
 
 .hollow-core span {
@@ -896,6 +927,42 @@ footer { border-top: 1px solid var(--line); padding: 34px 0; position: relative;
   .skills-grid { grid-template-columns: 1fr; }
   .contact-card { padding: 36px 24px; }
   .contact-buttons { flex-direction: column; }
+}
+
+
+/* ---------------------------------------------------------
+   CLICK RIPPLE
+   A short-lived element JS creates at each click point,
+   colored to match whatever the palette currently is.
+   --------------------------------------------------------- */
+.click-ripple {
+  position: fixed;
+  width: 16px;
+  height: 16px;
+  margin-left: -8px;
+  margin-top: -8px;
+  border-radius: 50%;
+  border: 1.5px solid hsla(var(--hue-base), 90%, 70%, 0.9);
+  box-shadow: 0 0 24px 4px hsla(var(--hue-base), 90%, 66%, 0.5);
+  pointer-events: none;
+  z-index: 999;
+  animation: rippleOut 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes rippleOut {
+  0%   { transform: scale(1); opacity: 1; }
+  100% { transform: scale(9); opacity: 0; }
+}
+
+
+/* ---------------------------------------------------------
+   TILT ON HOVER
+   JS sets the rotation via inline style; this just gives it
+   perspective and a smooth settle when the pointer leaves.
+   --------------------------------------------------------- */
+.glass-panel {
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
 
