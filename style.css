@@ -109,6 +109,25 @@ svg { width: 20px; height: 20px; }
   background: var(--void);
 }
 
+.bg-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+
+  /* the source clip is a blue-teal starfield — shift it
+     toward violet so it sits with the rest of the palette
+     instead of clashing with it, and dim it so text stays
+     easy to read on top */
+  filter: hue-rotate(70deg) saturate(1.3) brightness(0.75);
+  opacity: 0.8;
+}
+
 .blob {
   position: absolute;
   border-radius: 50%;
