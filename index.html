@@ -4,16 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Prem Kumar — Quality Analyst. Portfolio, experience, skills and education.">
-  <meta name="theme-color" content="#F6F3EA">
+  <meta name="theme-color" content="#030014">
   <title>Prem Kumar | Quality Analyst</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- ============================================
+       AMBIENT BACKGROUND — void, blobs, grid, grain
+       ============================================ -->
+  <div class="void-bg" aria-hidden="true">
+    <div class="blob blob-a"></div>
+    <div class="blob blob-b"></div>
+    <div class="blob blob-c"></div>
+    <div class="void-grid"></div>
+    <div class="void-grain"></div>
+  </div>
 
   <!-- ============================================
        NAV
@@ -35,7 +48,7 @@
         <a href="#experience" class="nav-link">Experience</a>
         <a href="#skills" class="nav-link">Skills</a>
         <a href="#education" class="nav-link">Education</a>
-        <a href="#contact" class="nav-link">Contact</a>
+        <a href="#contact" class="nav-link nav-cta">Contact</a>
       </nav>
 
       <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
@@ -54,65 +67,85 @@
     </nav>
   </header>
 
-  <main>
+  <main id="main">
 
     <!-- ============================================
          HERO
+         (animates on load with pure CSS — never
+         depends on JavaScript to become visible)
          ============================================ -->
     <section class="hero" id="home">
       <div class="hero-inner">
 
-        <div class="hero-main reveal">
+        <div class="hero-main">
 
-          <p class="eyebrow">FIELD REPORT &nbsp;·&nbsp; STATUS: <span class="status-dot"></span> OPEN TO OPPORTUNITIES</p>
+          <p class="eyebrow anim-in" style="--d:0s">
+            <span class="pulse-dot"></span>
+            AVAILABLE FOR OPPORTUNITIES
+          </p>
 
-          <h1 class="hero-name">Prem Kumar</h1>
-          <p class="hero-role">Quality Analyst — I Planet BPO Pvt Ltd</p>
+          <h1 class="hero-name anim-in" style="--d:0.08s">
+            <span class="gradient-text">Prem Kumar</span>
+          </h1>
 
-          <p class="hero-tagline">
+          <p class="hero-role anim-in" style="--d:0.16s">
+            Quality Analyst — I Planet BPO Pvt Ltd
+          </p>
+
+          <p class="hero-tagline anim-in" style="--d:0.24s">
             <span class="tagline-lead">Building better results through</span>
-            <span class="tagline-changing" id="taglineChanging">
+            <span class="tagline-changing">
               <span id="typingText">continuous improvement</span><span class="cursor">|</span>
             </span>
           </p>
 
-          <p class="hero-desc">
+          <p class="hero-desc anim-in" style="--d:0.32s">
             I'm a Quality Analyst with 2+ years of professional experience, focused on
             maintaining quality, spotting opportunities for improvement, and delivering
             consistent results. I'm an adaptable, curious learner who enjoys new challenges
             and growing both professionally and personally.
           </p>
 
-          <div class="hero-actions">
-            <a href="#experience" class="btn btn-primary">View the Record</a>
-            <a href="#contact" class="btn btn-outline">Open a Ticket</a>
+          <div class="hero-actions anim-in" style="--d:0.4s">
+            <a href="#experience" class="btn btn-primary">
+              <span>Explore My Work</span>
+            </a>
+            <a href="#contact" class="btn btn-outline">Get in Touch</a>
           </div>
 
-          <dl class="hero-meta">
-            <div>
-              <dt>Experience</dt>
-              <dd>2+ yrs</dd>
+          <div class="hero-stats anim-in" style="--d:0.48s">
+            <div class="stat">
+              <strong>2+</strong>
+              <span>Years Experience</span>
             </div>
-            <div>
-              <dt>Studying</dt>
-              <dd>BBA</dd>
+            <div class="stat">
+              <strong>BBA</strong>
+              <span>Currently Studying</span>
             </div>
-            <div>
-              <dt>Since</dt>
-              <dd>Aug 2024</dd>
+            <div class="stat">
+              <strong>2024</strong>
+              <span>Career Started</span>
             </div>
-          </dl>
+          </div>
 
         </div>
 
-        <div class="hero-side reveal">
-          <div class="stamp" aria-hidden="true">
-            <span>INSPECTED BY</span>
-            <strong>P.K.</strong>
-            <span class="stamp-pass">PASS ✓</span>
+        <div class="hero-visual anim-in" style="--d:0.2s">
+          <div class="ring-orbit">
+            <div class="ring ring-outer"></div>
+            <div class="ring ring-inner"></div>
+            <div class="orbit-dot dot-1"></div>
+            <div class="orbit-dot dot-2"></div>
+            <div class="hollow-core">
+              <span>PK</span>
+            </div>
           </div>
         </div>
 
+      </div>
+
+      <div class="scroll-cue anim-in" style="--d:0.6s" aria-hidden="true">
+        <span></span>
       </div>
     </section>
 
@@ -124,14 +157,13 @@
       <div class="section-inner">
 
         <div class="section-head reveal">
-          <p class="section-eyebrow">01 — Inspection Notes</p>
-          <h2>About Me</h2>
+          <p class="section-eyebrow">01 · About</p>
+          <h2>Focused on quality.<br>Driven by growth.</h2>
         </div>
 
         <div class="about-grid">
 
-          <div class="panel about-notes reveal">
-            <p class="panel-label">Findings</p>
+          <div class="glass-panel about-main reveal">
             <p>
               I believe professional growth comes from staying curious, accepting
               challenges, and continuously improving the way work gets done. My
@@ -145,12 +177,14 @@
             </p>
           </div>
 
-          <ul class="checklist reveal">
-            <li><span class="check">✓</span> Detail-oriented under pressure</li>
-            <li><span class="check">✓</span> Adapts fast to new processes</li>
-            <li><span class="check">✓</span> Clear, calm communicator</li>
-            <li><span class="check">✓</span> Growth-oriented mindset</li>
-          </ul>
+          <div class="chip-grid reveal">
+            <span class="chip">Detail-oriented</span>
+            <span class="chip">Fast adapter</span>
+            <span class="chip">Clear communicator</span>
+            <span class="chip">Growth-focused</span>
+            <span class="chip">Problem solver</span>
+            <span class="chip">Team player</span>
+          </div>
 
         </div>
 
@@ -161,25 +195,27 @@
     <!-- ============================================
          EXPERIENCE
          ============================================ -->
-    <section class="section section-alt" id="experience">
+    <section class="section" id="experience">
       <div class="section-inner">
 
         <div class="section-head reveal">
-          <p class="section-eyebrow">02 — Change Log</p>
-          <h2>Experience</h2>
+          <p class="section-eyebrow">02 · Experience</p>
+          <h2>Professional Journey</h2>
         </div>
 
-        <article class="log-entry reveal">
+        <article class="timeline-card glass-panel reveal">
 
-          <div class="log-meta">
-            <span class="pill pill-active">ACTIVE</span>
-            <span class="log-date">AUG 2024 — PRESENT</span>
+          <div class="timeline-glow" aria-hidden="true"></div>
+
+          <div class="timeline-top">
+            <span class="pill pill-active"><span class="pulse-dot small"></span> ACTIVE</span>
+            <span class="timeline-date">AUG 2024 — PRESENT</span>
           </div>
 
           <h3>Quality Analyst</h3>
-          <p class="log-company">I Planet BPO Pvt Ltd</p>
+          <p class="timeline-company">I Planet BPO Pvt Ltd</p>
 
-          <p class="log-desc">
+          <p class="timeline-desc">
             Working as a Quality Analyst with a focus on maintaining quality
             standards, identifying improvement opportunities, supporting
             consistent performance, and continuously developing professional
@@ -206,46 +242,52 @@
       <div class="section-inner">
 
         <div class="section-head reveal">
-          <p class="section-eyebrow">03 — Capability Checklist</p>
-          <h2>Skills</h2>
+          <p class="section-eyebrow">03 · Skills</p>
+          <h2>What I Bring</h2>
         </div>
 
-        <div class="skill-list reveal">
+        <div class="skills-grid">
 
-          <div class="skill-row">
-            <span class="skill-name">Quality Focus</span>
-            <div class="meter"><span style="width:90%"></span></div>
-            <span class="skill-pct">90%</span>
+          <div class="skill-card glass-panel reveal">
+            <div class="skill-icon">Q</div>
+            <h3>Quality Focus</h3>
+            <p>Maintaining standards and paying close attention to details that affect outcomes.</p>
+            <div class="bar"><span class="bar-fill" style="width:90%" data-pct="90"></span></div>
           </div>
 
-          <div class="skill-row">
-            <span class="skill-name">Adaptability</span>
-            <div class="meter"><span style="width:92%"></span></div>
-            <span class="skill-pct">92%</span>
+          <div class="skill-card glass-panel reveal">
+            <div class="skill-icon">A</div>
+            <h3>Adaptability</h3>
+            <p>Comfortable adjusting to new processes, responsibilities and changing situations.</p>
+            <div class="bar"><span class="bar-fill" style="width:92%" data-pct="92"></span></div>
           </div>
 
-          <div class="skill-row">
-            <span class="skill-name">Problem Solving</span>
-            <div class="meter"><span style="width:86%"></span></div>
-            <span class="skill-pct">86%</span>
+          <div class="skill-card glass-panel reveal">
+            <div class="skill-icon">P</div>
+            <h3>Problem Solving</h3>
+            <p>Looking at challenges logically and identifying practical ways to improve.</p>
+            <div class="bar"><span class="bar-fill" style="width:86%" data-pct="86"></span></div>
           </div>
 
-          <div class="skill-row">
-            <span class="skill-name">Learning Mindset</span>
-            <div class="meter"><span style="width:94%"></span></div>
-            <span class="skill-pct">94%</span>
+          <div class="skill-card glass-panel reveal">
+            <div class="skill-icon">L</div>
+            <h3>Learning Mindset</h3>
+            <p>Continuously developing knowledge and taking on opportunities to learn.</p>
+            <div class="bar"><span class="bar-fill" style="width:94%" data-pct="94"></span></div>
           </div>
 
-          <div class="skill-row">
-            <span class="skill-name">Communication</span>
-            <div class="meter"><span style="width:85%"></span></div>
-            <span class="skill-pct">85%</span>
+          <div class="skill-card glass-panel reveal">
+            <div class="skill-icon">C</div>
+            <h3>Communication</h3>
+            <p>Communicating information clearly while working with different people and situations.</p>
+            <div class="bar"><span class="bar-fill" style="width:85%" data-pct="85"></span></div>
           </div>
 
-          <div class="skill-row">
-            <span class="skill-name">Growth Mindset</span>
-            <div class="meter"><span style="width:91%"></span></div>
-            <span class="skill-pct">91%</span>
+          <div class="skill-card glass-panel reveal">
+            <div class="skill-icon">G</div>
+            <h3>Growth Mindset</h3>
+            <p>Always looking for ways to improve, develop and become more effective.</p>
+            <div class="bar"><span class="bar-fill" style="width:91%" data-pct="91"></span></div>
           </div>
 
         </div>
@@ -257,30 +299,30 @@
     <!-- ============================================
          EDUCATION
          ============================================ -->
-    <section class="section section-alt" id="education">
+    <section class="section" id="education">
       <div class="section-inner">
 
         <div class="section-head reveal">
-          <p class="section-eyebrow">04 — Certification Log</p>
-          <h2>Education</h2>
+          <p class="section-eyebrow">04 · Education</p>
+          <h2>Academic Journey</h2>
         </div>
 
-        <div class="cert-grid">
+        <div class="edu-grid">
 
-          <div class="cert-card reveal">
+          <div class="edu-card glass-panel reveal">
             <span class="pill pill-progress">IN PROGRESS</span>
             <h3>Bachelor of Business Administration</h3>
             <p>Currently pursuing a BBA, developing knowledge across business, management and professional disciplines.</p>
           </div>
 
-          <div class="cert-card reveal">
-            <span class="pill pill-verified">VERIFIED</span>
+          <div class="edu-card glass-panel reveal">
+            <span class="pill pill-done">COMPLETED</span>
             <h3>HSC</h3>
             <p>Successfully completed Higher Secondary education.</p>
           </div>
 
-          <div class="cert-card reveal">
-            <span class="pill pill-verified">VERIFIED</span>
+          <div class="edu-card glass-panel reveal">
+            <span class="pill pill-done">COMPLETED</span>
             <h3>SSC</h3>
             <p>Successfully completed Secondary education.</p>
           </div>
@@ -297,26 +339,37 @@
     <section class="section" id="contact">
       <div class="section-inner">
 
-        <div class="contact-card reveal">
+        <div class="contact-card glass-panel reveal">
+          <div class="contact-glow" aria-hidden="true"></div>
 
-          <div>
-            <p class="section-eyebrow">05 — Open a Ticket</p>
-            <h2>Let's build something better.</h2>
-            <p class="contact-sub">I'm always open to learning, professional opportunities, and meaningful conversations.</p>
+          <p class="section-eyebrow">05 · Contact</p>
+          <h2>Let's build something <span class="gradient-text">better.</span></h2>
+          <p class="contact-sub">I'm always open to learning, professional opportunities, and meaningful conversations.</p>
+
+          <div class="contact-buttons">
+
+            <a href="mailto:prem012006k@gmail.com" class="contact-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <rect x="3" y="5" width="18" height="14" rx="2.5"></rect>
+                <path d="M3.5 6.5l8.5 7 8.5-7"></path>
+              </svg>
+              <span>
+                <small>Email</small>
+                prem012006k@gmail.com
+              </span>
+            </a>
+
+            <a href="tel:+918928996632" class="contact-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M4 4.5c0-.6.4-1 1-1h3l2 5-2 1.3a11 11 0 0 0 5.2 5.2l1.3-2 5 2v3c0 .6-.4 1-1 1C10.6 20 4 13.4 4 4.5Z"></path>
+              </svg>
+              <span>
+                <small>Phone</small>
+                +91 89289 96632
+              </span>
+            </a>
+
           </div>
-
-          <dl class="contact-fields">
-            <div>
-              <dt>Email</dt>
-              <dd><a href="mailto:prem012006k@gmail.com">prem012006k@gmail.com</a></dd>
-            </div>
-            <div>
-              <dt>Phone</dt>
-              <dd><a href="tel:+918928996632">+91 89289 96632</a></dd>
-            </div>
-          </dl>
-
-          <a href="mailto:prem012006k@gmail.com" class="btn btn-primary">Send an Email</a>
 
         </div>
 
